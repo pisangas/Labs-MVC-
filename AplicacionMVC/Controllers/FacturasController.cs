@@ -22,6 +22,30 @@ namespace AplicacionMVC.Controllers
             Session["FacturaViewModel"] = facturaViewModel;
             return View(facturaViewModel);
         }
+
+
+        public ActionResult EliminarItem (int? id)
+        {
+            var facturaViwModel = Session["FacturaViewModel"] as FacturaViewModel;
+
+            ProductoViewModel productoViewModel = facturaViwModel.Productos.FirstOrDefault(p => p.ProductoId == id);
+
+            if (productoViewModel.Cantidad == 1)
+            {
+                facturaViwModel.Productos.Remove(productoViewModel);
+            }
+            else
+            {
+                productoViewModel.Cantidad--;
+            }
+
+            ViewBag.ClienteId = new SelectList(db.Personas.OrderBy(p => p.Nombre).ThenBy(a => a.Apellido), "PersonaId", "NombreCompleto");
+
+            return View("NuevaFactura", facturaViwModel);
+
+        }
+
+
         #endregion
 
         #region [Acciones para Producto]
