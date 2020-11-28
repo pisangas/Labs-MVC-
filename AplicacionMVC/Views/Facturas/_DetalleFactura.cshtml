@@ -1,0 +1,44 @@
+﻿@model AplicacionMVC.ViewModel.FacturaViewModel
+
+<h2>Detalle Factura</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(p => p.Producto.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(p => p.Producto.Precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(p => p.Producto.Cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(p => p.Producto.SubTotal)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.Productos != null && Model.Productos.Count() > 0)
+    {
+        foreach (var producto in Model.Productos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(p => producto.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(p => producto.Precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(p => producto.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(p => producto.SubTotal)
+                </td>
+                <td>
+                    @Html.ActionLink("Eliminar", "EliminarItem", new { id = producto.ProductoId })
+                </td>
+            </tr>
+        }
+    }
+</table>

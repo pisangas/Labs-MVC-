@@ -10,13 +10,14 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         @Html.ActionLink("Proyecto MVC", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        @*@Html.ActionLink("ProyectoMVC", "Index", "Inventarios", new { area = "ModuloInventarios" }, new { @class = "navbar-brand" })*@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                    @Html.ActionLink(": : Home : : ", "Index", "Home", null, new { @class = "nav-link" })
                 </li>
                 @*<li class="nav-item active">
             @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
@@ -28,22 +29,26 @@
             @Html.ActionLink("Prueba", "Prueba", "Home", null, new { @class = "nav-link" })
         </li>*@
                 <li class="nav-item active">
-                    @Html.ActionLink("Tipos de Documentos", "Index", "TipoDocumentos", null, new { @class = "nav-link" })
+                    @Html.ActionLink("| Tipos de Documentos |", "Index", "TipoDocumentos", null, new { @class = "nav-link" })
 
                     @*2 --> nombre accion controller
             3 --> nombre controller*@
                 </li>
 
                 <li class="nav-item active">
-                    @Html.ActionLink("Personas", "Index", "Personas", null, new { @class = "nav-link" })
+                    @Html.ActionLink("| Personas |", "Index", "Personas", null, new { @class = "nav-link" })
                 </li>
 
                 <li class="nav-item active">
-                    @Html.ActionLink("Productos", "Index", "Productos", null, new { @class = "nav-link" })
+                    @Html.ActionLink("| Productos |", "Index", "Productos", null, new { @class = "nav-link" })
                 </li>
 
                 <li class="nav-item active">
-                    @Html.ActionLink("Facturas", "Nuevafactura", "Facturas", null, new { @class = "nav-link" })
+                    @Html.ActionLink("| Facturas | ", "Nuevafactura", "Facturas", null, new { @class = "nav-link" })
+                </li>
+
+                <li class="nav-item active">
+                    @Html.ActionLink("| Inventario | ", "Index", "Inventarios", new { area = "ModuloInventarios" }, new { @class = "nav-link" })
                 </li>
 
             </ul>

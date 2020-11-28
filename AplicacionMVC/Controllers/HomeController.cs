@@ -32,5 +32,20 @@ namespace AplicacionMVC.Controllers
 
             return View();
         }
+
+        
+
+        public ActionResult AJAXAntiforgery()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AJAXAntiforgery(string nombre)
+        {
+            return Json(new { saludo = "Hola " + nombre});
+        }
+
     }
 }

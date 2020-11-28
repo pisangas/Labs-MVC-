@@ -337,6 +337,8 @@
     <Content Include="Views\Productos\Index.cshtml" />
     <Content Include="Views\Facturas\Nuevafactura.cshtml" />
     <Content Include="Views\Facturas\AgregarProducto.cshtml" />
+    <Content Include="Views\Facturas\_DetalleFactura.cshtml" />
+    <Content Include="Views\Home\AJAXAntiforgery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
