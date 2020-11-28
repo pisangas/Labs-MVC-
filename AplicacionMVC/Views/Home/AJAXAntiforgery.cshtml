@@ -5,33 +5,36 @@
 
 <h2>AJAXAntiforgery</h2>
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "_AJAXAntiforgeryForm" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AJAXAntiforgeryForm" }))
 {
     @Html.AntiForgeryToken();
 }
 
-    <button id="btnEnviar">
-        Enviar
-    </button>
+<button id="btnEnviar">
+    Enviar
+</button>
 
+@section Scripts {
     <script>
         $('#btnEnviar').click(function () {
-            var form = $('#_AJAXAntiforgeryForm');
-            var token = $('input[name = "_RequestVerificationToken"]', form).val();
+            var form = $('#__AJAXAntiforgeryForm');
+            var token = $('input[name = "__RequestVerificationToken"]', form).val();
 
             $.ajax({
                 url: "/Home/AJAXAntiforgery",
                 type: "POST",
                 data: {
-                    _RequestVerificationToken: token,
+                    __RequestVerificationToken: token,
                     nombre: "Eduardo Gil"
                 },
                 success: function (resultado) {
-                    alert(resultado.nombre);
+                    alert(resultado.saludo);
                 }
             });
             return false;
         });
     </script>
+}
+
 
 
