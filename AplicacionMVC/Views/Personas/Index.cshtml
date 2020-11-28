@@ -1,0 +1,89 @@
+﻿@*@model IEnumerable<AplicacionMVC.Models.Persona>*@
+
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<AplicacionMVC.Models.Persona>
+
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Personas", FormMethod.Get))
+{
+    <p>
+        Filtro: @Html.TextBox("Filtro", ViewBag.FiltroActual as string)
+        <input type="submit" value="Buscar" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().TipoDocumento.Descripcion)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Nombre)*@
+            @Html.ActionLink(Html.DisplayNameFor(model => model.FirstOrDefault().Nombre).ToHtmlString(), "Index", new { ordenamiento = ViewBag.NombreOrdenamiento, filtroActual = ViewBag.FiltroActual })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Direccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Correo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Documento)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoDocumento.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Correo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Documento)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PersonaId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PersonaId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PersonaId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+@Html.PagedListPager(Model, pagina => Url.Action("Index", new { pagina, ordenamiento = ViewBag.OrdenamientoActual, filtroActual = ViewBag.FiltroActual}))
