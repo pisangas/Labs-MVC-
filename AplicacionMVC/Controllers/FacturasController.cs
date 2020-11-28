@@ -119,6 +119,19 @@ namespace AplicacionMVC.Controllers
                             DetalleFacturas = ingresarfacturaViewModel.Productos.Select(p => new DetalleFactura { ProductoId = p.ProductoId, Precio = p.Precio, Cantidad = p.Cantidad }).ToList()
                         };
 
+                        db.Facturas.Add(factura);
+                        db.SaveChanges();
+
+                        transaccion.Commit();
+
+                        ViewBag.Mensaje = $"La factura Nro. {factura.FacturaId} fue ingresada exitosamente";
+
+                        facturaViewModel = new FacturaViewModel() { Productos = new List<ProductoViewModel>() };
+                        ViewBag.ClienteId = new SelectList(db.Personas.OrderBy(p => p.Nombre).ThenBy(a => a.Apellido), "PersonaId", "NombreCompleto");
+
+                        Session["FacturaViewModel"] = facturaViewModel;
+                        return View(facturaViewModel);
+
                     }
                     catch (Exception ex)
                     {
