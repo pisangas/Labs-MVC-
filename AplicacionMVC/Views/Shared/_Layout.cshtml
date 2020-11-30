@@ -16,27 +16,23 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    @Html.ActionLink(": : Home : : ", "Index", "Home", null, new { @class = "nav-link" })
-                </li>
                 @*<li class="nav-item active">
-            @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
-        </li>
-        <li class="nav-item active">
-            @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
-        </li>
-        <li class="nav-item active">
-            @Html.ActionLink("Prueba", "Prueba", "Home", null, new { @class = "nav-link" })
-        </li>*@
+                        @Html.ActionLink(": : Home : : ", "Index", "Home", null, new { @class = "nav-link" })
+                    </li>*@
+
+                <li class="nav-item active">
+                    @Html.ActionLink(AplicacionMVC.Recursos.idioma.Inicio, "Index", "Home", null, new { @class = "nav-link" })
+                </li>
+
                 <li class="nav-item active">
                     @Html.ActionLink("| Tipos de Documentos |", "Index", "TipoDocumentos", null, new { @class = "nav-link" })
 
                     @*2 --> nombre accion controller
-            3 --> nombre controller*@
+                        3 --> nombre controller*@
                 </li>
 
                 <li class="nav-item active">
-                    @Html.ActionLink("| Personas |", "Index", "Personas", null, new { @class = "nav-link" })
+                    @Html.ActionLink(AplicacionMVC.Recursos.idioma.Personas, "Index", "Personas", null, new { @class = "nav-link" })
                 </li>
 
                 <li class="nav-item active">
