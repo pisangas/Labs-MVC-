@@ -28,7 +28,7 @@ namespace MVC_Autenticacion.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(RoleViewModel roleViewModel)
+        public ActionResult Crear(RoleViewModel roleViewModel)
         {
             if (ModelState.IsValid)
             {
