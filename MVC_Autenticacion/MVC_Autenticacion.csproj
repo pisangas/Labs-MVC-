@@ -342,6 +342,7 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\Crear.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Usuarios\AgregarRol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

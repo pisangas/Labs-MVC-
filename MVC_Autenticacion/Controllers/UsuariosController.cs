@@ -5,6 +5,7 @@ using MVC_Autenticacion.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -24,7 +25,63 @@ namespace MVC_Autenticacion.Controllers
 
         public ActionResult Roles(string id)
         {
-            var usuario = db.Users.Find(id);
+            UserViewModel userViewModel = CargarInformacion(id);
+            return View(userViewModel);
+        }
+
+        public ActionResult AgregarRol(string userId)
+        {
+            if (String.IsNullOrEmpty(userId))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var user = db.Users.Find(userId);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            var userViewModel = new UserViewModel
+            {
+                UserId = user.Id,
+                Nombre = user.UserName,
+                Email = user.Email
+            };
+
+            ViewBag.RolId = new SelectList(db.Roles.OrderBy(r => r.Name), "Id", "Name");
+
+            return View(userViewModel);
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult AgregarRol(UserViewModel userViewModel)
+        {
+            var rolId = Request["RolId"];
+
+            if (string.IsNullOrEmpty(rolId))
+            {
+                ViewBag.RolId = new SelectList(db.Roles.OrderBy(r => r.Name), "Id", "Name");
+                return View(userViewModel);
+            }
+
+            var rol = db.Roles.Find(rolId);
+
+            if (!gestorUsuarios.IsInRole(userViewModel.UserId, rol.Name))
+            {
+                gestorUsuarios.AddToRole(userViewModel.UserId, rol.Name);
+            }
+            return View("Roles", userViewModel);
+
+        }
+
+        private UserViewModel CargarInformacion(string userId)
+        {
+            var usuario = db.Users.Find(userId);
 
             if (usuario == null) return null;
 
@@ -33,7 +90,7 @@ namespace MVC_Autenticacion.Controllers
                 UserId = usuario.Id,
                 Nombre = usuario.UserName,
                 Email = usuario.Email,
-                Roles= new List<RoleViewModel>()
+                Roles = new List<RoleViewModel>()
             };
 
             foreach (var item in usuario.Roles)
@@ -46,14 +103,9 @@ namespace MVC_Autenticacion.Controllers
                 };
 
                 userViewModel.Roles.Add(roleViewModel);
-
-
             }
 
-
-
-
-            return View();
+            return userViewModel;
         }
 
     }
