@@ -75,8 +75,8 @@ namespace MVC_Autenticacion.Controllers
             {
                 gestorUsuarios.AddToRole(userViewModel.UserId, rol.Name);
             }
+            userViewModel = CargarInformacion(userViewModel.UserId);
             return View("Roles", userViewModel);
-
         }
 
         private UserViewModel CargarInformacion(string userId)

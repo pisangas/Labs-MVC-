@@ -1,0 +1,31 @@
+﻿@model MVC_Autenticacion.ViewModels.UserViewModel
+@{
+    ViewBag.Title = "Roles";
+}
+
+<h2>Roles de Usuario</h2>
+
+<p>
+    @Html.ActionLink("Agegar Rol", "AgregarRol", new {userId = Model.UserId}, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Retornar", "Index", "usuarios", null, new { @class = "btn btn-info" })
+</p>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.rol.Nombre)
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Roles)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelitem => item.Nombre)
+            </td>
+        </tr>
+
+    }
+
+</table>
+
